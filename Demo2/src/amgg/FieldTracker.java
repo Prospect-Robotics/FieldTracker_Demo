@@ -43,7 +43,7 @@ public class FieldTracker {
 	 * @return - angle by which robot needs to turn
 	 */
 	public double getAngleToPoint(double x, double y) {
-		return FieldMath.angleToPoint(robotX, robotY, x, x, robotAngle);
+		return FieldMath.angleToPoint(robotX, robotY, x, y, robotAngle);
 	}
 
 	/**
