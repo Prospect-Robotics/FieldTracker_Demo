@@ -1,5 +1,9 @@
 package amgg;
 
+/**
+ * @author amgg
+ * @author Dragon Controller
+ */
 public class FieldTracker {
 	double robotX;
 	double robotY;
