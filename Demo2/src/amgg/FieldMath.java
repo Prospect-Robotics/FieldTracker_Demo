@@ -1,8 +1,13 @@
 package amgg;
 
-public class FieldMath {
-	static double angleToPoint(double x1, double y1, double x2, double y2, double angle1) {
-		return bestAngle(angle1, Math.toDegrees(Math.atan2((y2 - y1), (x2 - x1))));
+import java.awt.Point;
+
+class FieldMath {
+	static double adjustedAngleToPoint(double x1, double y1, double x2, double y2, double angle1) {
+		return bestAngle(angle1, angleToPoint(x1,y1,x2,y2));
+	}
+	static double angleToPoint(double x1,double y1,double x2, double y2){
+		return Math.toDegrees(Math.atan2((y2 - y1), (x2 - x1)));
 	}
 
 	static double wrapAngle(double angle) {
@@ -20,4 +25,6 @@ public class FieldMath {
 		}
 		return angle;
 	}
+	
+	
 }
