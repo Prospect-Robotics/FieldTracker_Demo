@@ -1,6 +1,9 @@
 package amgg;
 
 import java.awt.Point;
+import java.awt.Shape;
+import java.awt.geom.Path2D;
+import java.util.ArrayList;
 
 /**
  * @author amgg
@@ -11,7 +14,7 @@ public class FieldTracker {
 	static double robotAngle;
 	static double robotWidth;
 	static double robotLength;
-
+	static ArrayList<Shape> obstacles = new ArrayList<Shape>();
 	/**
 	 * @param robotX
 	 *            - starting x coordinate of robot
@@ -84,6 +87,22 @@ public class FieldTracker {
 		turnedRobot(getAngleToPoint(x, y));
 		movedRobot(getDistanceToPoint(x, y));
 	}
+	
+	public void createObstacle(Point.Double[] points){
+		if(points.length>2){
+			Path2D.Double path = new Path2D.Double();
+			path.moveTo(points[0].getX(),points[0].getY());
+			for(int i=1;i<points.length;i++){
+				path.lineTo(points[i].getX(),points[i].getY());
+			}
+			path.closePath();
+			createObstacle(path);
+		}
+	}
+	public void createObstacle(Shape obstacle){
+		obstacles.add(obstacle);
+	}
+	
 
 	/*public boolean collides(double newX, double newY, double objectX, double objectY) {
 		double angle = Math.atan((newY - robotY / newX - robotX));
