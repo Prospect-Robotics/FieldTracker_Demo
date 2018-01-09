@@ -20,5 +20,4 @@ public class FieldMath {
 		}
 		return angle;
 	}
-
 }
