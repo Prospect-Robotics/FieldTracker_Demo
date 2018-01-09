@@ -60,6 +60,9 @@ public class FieldTracker {
 	public static double getAngleToPoint(double x, double y) {
 		return FieldMath.adjustedAngleToPoint(robotPosition.getX(), robotPosition.getY(), x, y, robotAngle);
 	}
+	public static double getAngleToPoint(Point.Double point) {
+		return getAngleToPoint(point.getX(),point.getY());
+	}
 
 	/**
 	 * @param x
