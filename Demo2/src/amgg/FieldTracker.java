@@ -76,7 +76,7 @@ public class FieldTracker {
 	public boolean collides(double newX, double newY, double objectX, double objectY) {
 		double angle = Math.atan((newY - robotY / newX - robotX));
 		if (newX - robotX == 0) {
-			angle = Math.PI / 2;
+			angle = Math.PI / 2 * Math.abs(newY - robotY) / (newY - robotY);
 		}
 		double angle2 = Math.atan2(robotHeight, robotWidth);
 		double distance = Math.hypot(robotWidth, robotHeight) / 2;
