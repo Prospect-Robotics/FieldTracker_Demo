@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.*;
 
-class Collisons {
+class Collisions {
 	static boolean doShapesCollide(Shape shape1, Shape shape2) {
 		Area a1 = new Area(shape1);
 		Area a2 = new Area(shape2);

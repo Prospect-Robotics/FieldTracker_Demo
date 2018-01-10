@@ -31,6 +31,7 @@ class ShapeMaker {
 				shapes.add(path);
 			}
 		} catch (FileNotFoundException e) {
+			System.err.println("FILE NOT FOUND");
 		}
 		return shapes;
 	}
