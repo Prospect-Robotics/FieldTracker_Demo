@@ -11,7 +11,9 @@ class FieldMath {
 	}
 
 	static double wrapAngle(double angle) {
-		angle %= 360;
+		if (angle>360){
+			angle -=360;
+		}
 		if (angle < 0) {
 			angle += 360;
 		}

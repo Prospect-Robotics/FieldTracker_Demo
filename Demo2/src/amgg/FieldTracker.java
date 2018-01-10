@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
@@ -42,7 +43,7 @@ public class FieldTracker {
 		FieldTracker.robotWidth = robotWidth;
 		FieldTracker.robotLength = robotLength;
 		FieldTracker.hasGUI = hasGUI;
-		if(hasGUI){
+		if (hasGUI) {
 			DemoWindow window = new DemoWindow();
 		}
 	}
@@ -54,7 +55,7 @@ public class FieldTracker {
 		}
 	}
 
-	public void draw() {
+	public static void draw() {
 		if (hasGUI) {
 			g2d.clearRect(0, 0, 900, 400);
 			g2d.setStroke(new BasicStroke(5));
@@ -63,9 +64,22 @@ public class FieldTracker {
 			for (Shape s : obstacles) {
 				g2d.draw(s);
 			}
+			Path2D.Double path = new Path2D.Double();
+			Point.Double a = new Point.Double(robotPosition.getX()-robotWidth/2,robotPosition.getY()-robotLength/2);
+			Point.Double b = new Point.Double(robotPosition.getX()-robotWidth/2,robotPosition.getY()+robotLength/2);
+			Point.Double c = new Point.Double(robotPosition.getX()+robotWidth/2,robotPosition.getY()+robotLength/2);
+			Point.Double d = new Point.Double(robotPosition.getX()+robotWidth/2,robotPosition.getY()-robotLength/2);
+			for(Point.Double pt:new Point.Double[] {a,b,c,d}){
+				PointMath.rotate(pt, robotPosition, robotAngle);
+			}
+			path.moveTo(a.getX(), a.getY());
+			for(Point.Double pt:new Point.Double[] {b,c,d}){
+				path.lineTo(pt.getX(),pt.getY());
+			}
+			path.closePath();
 			g2d.setColor(Color.MAGENTA);
-			g2d.draw(new Rectangle2D.Double(robotPosition.getX() - robotWidth / 2,
-					robotPosition.getY() - robotLength / 2, robotWidth, robotLength));
+			g2d.draw(path);
+			DemoWindow.dialog.repaint();
 		}
 	}
 
@@ -73,7 +87,7 @@ public class FieldTracker {
 	 * @param angle
 	 *            - update the robot's angle in the tracker by this amount
 	 */
-	public void turnedRobot(double angle) {
+	public static void turnedRobot(double angle) {
 		robotAngle = FieldMath.wrapAngle(robotAngle + angle);
 	}
 
@@ -89,9 +103,7 @@ public class FieldTracker {
 	 * @param distance
 	 *            - move the robot forwards in the tracker by this amount
 	 */
-	public void movedRobot(double distance) {
-		double sin = Math.sin(Math.toRadians(robotAngle));
-		double cos = Math.cos(Math.toRadians(robotAngle));
+	public static void movedRobot(double distance) {
 		PointMath.moveAlong(robotPosition, distance, robotAngle);
 	}
 
