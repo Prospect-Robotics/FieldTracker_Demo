@@ -103,6 +103,8 @@ public class FieldTracker {
 		obstacles.add(obstacle);
 	}
 	
+	
+	
 
 	/*public boolean collides(double newX, double newY, double objectX, double objectY) {
 		double angle = Math.atan((newY - robotY / newX - robotX));
